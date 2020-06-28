@@ -1,0 +1,106 @@
+<div class="ui dimmer" [class.active]="loading">
+  <div class="ui text loader">Loading</div>
+</div>
+
+<div class="jumbotron bg-white text-center">
+  <h1 class="display-4">Covid-19 Tracker - Global</h1>
+  <hr />
+  <app-dashboard-card
+    [totalConfirmed]="totalConfirmed"
+    [totalActive]="totalActive"
+    [totalRecovered]="totalRecovered"
+    [totalDeaths]="totalDeaths"
+  ></app-dashboard-card>
+</div>
+<hr />
+<div class="ui form">
+  <div class="inline fields">
+    <label for="caseType">Select Case Type:</label>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input
+          type="radio"
+          id="confirmed"
+          #confirmed
+          (click)="updateChart(confirmed)"
+          name="caseType"
+          value="confirmed"
+          checked=""
+          tabindex="0"
+          class="hidden"
+        />
+        <label for="confirmed">Confirmed</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input
+          type="radio"
+          id="active"
+          #active
+          (click)="updateChart(active)"
+          name="caseType"
+          value="active"
+          tabindex="0"
+          class="hidden"
+        />
+        <label for="active">Active</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input
+          type="radio"
+          id="recovered"
+          #recovered
+          (click)="updateChart(recovered)"
+          name="caseType"
+          value="recovered"
+          tabindex="0"
+          class="hidden"
+        />
+        <label for="recovered">Recovered</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui radio checkbox">
+        <input
+          type="radio"
+          id="deaths"
+          #deaths
+          name="caseType"
+          value="deaths"
+          tabindex="0"
+          class="hidden"
+          (click)="updateChart(deaths)"
+        />
+        <label for="deaths">Deaths</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <google-chart
+      [type]="chart.PieChart"
+      [data]="chartDataTable"
+      [title]="chart.title"
+      [columns]="chart.columns"
+      [height]="chart.height"
+      [width]="chart.width"
+      [options]="chart.options"
+    ></google-chart>
+  </div>
+  <div class="col">
+    <google-chart
+      [type]="chart.ColumnChart"
+      [data]="chartDataTable"
+      [title]="chart.title"
+      [height]="chart.height"
+      [columns]="chart.columns"
+      [width]="chart.width"
+      [options]="chart.options"
+    ></google-chart>
+  </div>
+</div>
